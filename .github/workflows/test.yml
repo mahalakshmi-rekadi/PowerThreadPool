@@ -27,6 +27,7 @@ jobs:
   tests-and-reports:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - name: Setup .NET
@@ -52,18 +53,3 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           file: '**/coverage.cobertura.xml'
-          token: ${{ secrets.GITHUB_TOKEN }}
-          name: 'Unit Test Results'
-          reporter: 'dotnet-trx'
-          path: '**/test-results.trx'
-          fail_on_error: false
-      - name: Install ReportGenerator tool
-        run: dotnet tool install --global dotnet-reportgenerator-globaltool
-      - name: Create reports
-        run: reportgenerator "-reports:**/coverage.cobertura.xml" "-targetdir:coverage" -reporttypes:"HtmlInline_AzurePipelines;Cobertura"
-      - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: '**/coverage.cobertura.xml'
-   
