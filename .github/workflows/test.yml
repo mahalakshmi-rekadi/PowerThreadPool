@@ -10,7 +10,8 @@ permissions:
 on:
     workflow_dispatch:
 
- build:
+jobs:
+  build:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
