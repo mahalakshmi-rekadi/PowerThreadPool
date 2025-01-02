@@ -12,7 +12,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 8.0.111
       - name: Run Tests and Generate TRX Report
         run: dotnet test UnitTest/UnitTest.csproj --logger "trx;LogFileName=test-results.trx" --collect:"XPlat Code Coverage"
      
